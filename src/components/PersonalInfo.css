@@ -1,0 +1,23 @@
+.info-row-1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#name {
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+
+#phone {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}
+
+#email {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}
