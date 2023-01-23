@@ -4,12 +4,14 @@ import ReactDOM from 'react-dom/client';
 import './PersonalInfo.css';
 import uniqid from 'uniqid'
 import PersonalInfoRendered from './PersonalInfoRender';
+import PersonalInfoForm from './PersonalInfoForm';
 
 class PersonalInfo extends React.Component {
   constructor(props){
     super(props)
     this.state = {
       info: [],
+      formComplete: false,
       nameInput: {
         text: '',
         id: uniqid(),
@@ -28,7 +30,8 @@ class PersonalInfo extends React.Component {
   onSubmitInfo = (e) => {
     e.preventDefault();
     this.setState({
-      info: this.state.info.concat(this.state.nameInput, this.state.numberInput, this.state.emailInput)
+      info: this.state.info.concat(this.state.nameInput, this.state.numberInput, this.state.emailInput),
+      formComplete: true
     }, () => console.log(this.state))
   }
 
@@ -62,7 +65,8 @@ class PersonalInfo extends React.Component {
 
 
   render(){
-    return (
+    if (this.state.formComplete === false){
+      return (
         <div className='info'>
             <form onSubmit={this.onSubmitInfo}>
                 <div className='info-row-1'>
@@ -78,10 +82,14 @@ class PersonalInfo extends React.Component {
                 </div>
                 <button type='submit'>Save</button>
             </form>
-            <PersonalInfoRendered info={this.state.info} />
         </div>
+      )
+    }   
+  if (this.state.formComplete === true){
+    return (
+      <PersonalInfoRendered info={this.state.info} />
     )
   }
-}
+}}
 
 export default PersonalInfo
