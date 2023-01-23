@@ -25,12 +25,16 @@ class PersonalInfo extends React.Component {
         id: uniqid(),
       },
     }
+
+    this.onSubmitInfo = this.onSubmitInfo.bind(this)
+    this.handleChange = this.handleChange.bind(this)
   }
 
   onSubmitInfo = (e) => {
     e.preventDefault();
+    const information = [this.state.nameInput, this.state.numberInput, this.state.emailInput]
     this.setState({
-      info: this.state.info.concat(this.state.nameInput, this.state.numberInput, this.state.emailInput),
+      info: information,
       formComplete: true
     }, () => console.log(this.state))
   }
@@ -62,7 +66,16 @@ class PersonalInfo extends React.Component {
     }
   }
 
+  handleCallback = () => {
+    this.setState(prevState => ({
+      formComplete: false
+    }), () => {
+      const name = document.getElementById('name-input').value = this.state.info[0].text
+      const tel = document.getElementById('phone-input').value = this.state.info[1].text
+      const email = document.getElementById('email-input').value = this.state.info[2].text
+    })
 
+  }
 
   render(){
     if (this.state.formComplete === false){
@@ -87,7 +100,7 @@ class PersonalInfo extends React.Component {
     }   
   if (this.state.formComplete === true){
     return (
-      <PersonalInfoRendered info={this.state.info} />
+      <PersonalInfoRendered info={this.state.info} parentCallback={this.handleCallback} />
     )
   }
 }}
