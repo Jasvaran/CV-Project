@@ -1,0 +1,9 @@
+/* form */
+.edu-form-container > form {
+    display: flex;
+    flex-direction: column;
+}
+
+.edu-button {
+    width: 50px;
+}

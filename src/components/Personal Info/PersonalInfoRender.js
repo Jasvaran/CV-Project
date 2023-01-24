@@ -1,5 +1,6 @@
 /* eslint-disable no-useless-constructor */
 import React from "react";
+import './PersonalInfoRender.css'
 
 class PersonalInfoRendered extends React.Component {
     constructor(props){
@@ -16,7 +17,7 @@ class PersonalInfoRendered extends React.Component {
         return (
             <div className="rendered-info">
                 {this.props.info.map(item => {
-                    return <p key={item.id}>{item.text}</p>
+                    return <p className="information" key={item.id}>{item.text}</p>
                 })}
                 <button className="edit" onClick={this.editInfo}>Edit</button>
             </div>

@@ -23,7 +23,12 @@
 }
 
 .cv-container {
+  background-color: white;
   height: 100%;
   width: 50%;
   border: 1px solid black;
+}
+
+body {
+  background-color: #66ccff;
 }

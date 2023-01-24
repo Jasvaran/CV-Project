@@ -3,8 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './PersonalInfo.css';
 import uniqid from 'uniqid'
-import PersonalInfoRendered from './PersonalInfoRender';
-import PersonalInfoForm from './PersonalInfoForm';
+import PersonalInfoRendered from "./PersonalInfoRender"
 
 class PersonalInfo extends React.Component {
   constructor(props){
@@ -25,7 +24,7 @@ class PersonalInfo extends React.Component {
         id: uniqid(),
       },
     }
-
+    this.nameRef = "";
     this.onSubmitInfo = this.onSubmitInfo.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
@@ -37,6 +36,7 @@ class PersonalInfo extends React.Component {
       info: information,
       formComplete: true
     }, () => console.log(this.state))
+    this.nameRef = information[0].text
   }
 
   handleChange = (e) => {
@@ -69,28 +69,26 @@ class PersonalInfo extends React.Component {
   handleCallback = () => {
     this.setState(prevState => ({
       formComplete: false
-    }), () => {
-      const name = document.getElementById('name-input').value = this.state.info[0].text
-      const tel = document.getElementById('phone-input').value = this.state.info[1].text
-      const email = document.getElementById('email-input').value = this.state.info[2].text
-    })
-
+    }))
   }
+
+
 
   render(){
     if (this.state.formComplete === false){
       return (
         <div className='info'>
+            <h1>Personal Information</h1>
             <form onSubmit={this.onSubmitInfo}>
                 <div className='info-row-1'>
                     <label htmlFor='name' id='name' > First and Last Name:
-                        <input type="text" id='name-input' onChange={this.handleChange} />
+                        <input type="text" value={this.state.nameInput.text} id='name-input' onChange={this.handleChange} />
                     </label>
                     <label htmlFor='phone' id='phone'> Phone Number:
-                        <input type='tel' id='phone-input' onChange={this.handleChange} />
+                        <input type='tel' value={this.state.numberInput.text} id='phone-input' onChange={this.handleChange} />
                     </label>
                     <label htmlFor='email' id='email'>Email: 
-                        <input type="email" id='email-input' onChange={this.handleChange} />
+                        <input type="email" value={this.state.emailInput.text} id='email-input' onChange={this.handleChange} />
                     </label>
                 </div>
                 <button type='submit'>Save</button>

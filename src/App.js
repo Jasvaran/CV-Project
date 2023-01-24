@@ -2,7 +2,8 @@
 import './App.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client'
-import PersonalInfo from './components/PersonalInfo';
+import PersonalInfo from './components/Personal Info/PersonalInfo';
+import EducationalExperience from './components/educational experience/educationalExperience';
 
 class App extends React.Component {
   constructor(props){
@@ -22,6 +23,7 @@ class App extends React.Component {
         <div className='cv-body'>
           <div className='cv-container'>
             <PersonalInfo />
+            <EducationalExperience />
           </div>
         </div>
       </div>
