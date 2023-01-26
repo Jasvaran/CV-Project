@@ -13,7 +13,7 @@ class EducationalExperience extends React.Component {
             dataToRender: []
         }
         this.eduForm = <EducationalForm submitCallback={this.handleSubmitCallback}/>
-        this.eduRender = <EducationalRender information={this.state.dataToRender} />
+        this.eduRender = <EducationalRender information={this.state.dataToRender} deleteCallback={this.handleDelete} />
         this.addEdu = this.addEdu.bind(this)
 
         
@@ -36,13 +36,19 @@ class EducationalExperience extends React.Component {
         }, () => {console.log(this.state)})
     }
 
+    handleDelete = (e) => {
+        this.setState({
+            dataToRender: this.state.dataToRender.filter(obj => obj.edu_id !== e.target.id)
+        })
+    }
+
     render() {
         return (
             <div className="educational">
                 <h1>Educational Experience</h1>
                 <button onClick={this.addEdu} className="add-xp">Add</button>
                 {(this.state.viewForm) ? this.eduForm : ''}
-                <EducationalRender information={this.state.dataToRender} />
+                <EducationalRender information={this.state.dataToRender} deleteCallback={this.handleDelete} />
             </div>
         )
     }

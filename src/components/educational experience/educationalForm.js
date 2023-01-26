@@ -68,12 +68,17 @@ class EducationalForm extends React.Component {
         e.preventDefault();
         const data = [this.state.schoolInput, this.state.fieldInput, this.state.startInput, this.state.endInput]
         this.setState({
-            eduInfo: [data]
+            eduInfo: [
+                {
+                    edu_id: uniqid(),
+                    eduData: data
+                }
+            ]
         }, () => {this.props.submitCallback(this.state.eduInfo)})
         
     }
 
-
+    
 
     render() {
         return (
