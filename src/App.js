@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client'
 import PersonalInfo from './components/Personal Info/PersonalInfo';
 import EducationalExperience from './components/educational experience/educationalExperience';
-
+import PracticalExperience from './components/practical experience/PracticalExperience';
 class App extends React.Component {
   constructor(props){
     super(props)
@@ -24,6 +24,7 @@ class App extends React.Component {
           <div className='cv-container'>
             <PersonalInfo />
             <EducationalExperience />
+            <PracticalExperience />
           </div>
         </div>
       </div>

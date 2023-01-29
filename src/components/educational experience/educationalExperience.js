@@ -10,11 +10,15 @@ class EducationalExperience extends React.Component {
 
         this.state = {
             viewForm: false,
-            dataToRender: []
+            dataToRender: [],
+            editId: '',
+
+
         }
-        this.eduForm = <EducationalForm submitCallback={this.handleSubmitCallback}/>
-        this.eduRender = <EducationalRender information={this.state.dataToRender} deleteCallback={this.handleDelete} />
+        this.eduForm = <EducationalForm submitCallback={this.handleSubmitCallback} />
+        this.eduRender = <EducationalRender editState={this.state} information={this.state.dataToRender} deleteCallback={this.handleDelete} />
         this.addEdu = this.addEdu.bind(this)
+        this.handleEditSubmit = this.handleEditSubmit.bind(this)
 
         
     }
@@ -33,7 +37,7 @@ class EducationalExperience extends React.Component {
             viewForm: !this.state.viewForm,
             dataToRender: this.state.dataToRender.concat(getInput)
 
-        }, () => {console.log(this.state)})
+        })
     }
 
     handleDelete = (e) => {
@@ -42,13 +46,44 @@ class EducationalExperience extends React.Component {
         })
     }
 
+    handleEdit = (e) => {
+        const dataKey = e.target.dataset.key
+        this.setState({
+            dataToRender: this.state.dataToRender.map(obj => obj.edu_id === dataKey ? {...obj, edit: !obj.edit} : obj),
+            editId: e.target.dataset.key
+
+        }, () => console.log(this.state))
+    }
+
+    
+    handleEditSubmit = (getInput) => {
+        console.log(getInput)
+        console.log(this.state)
+        const reference = this.state
+        let ind = reference.dataToRender.findIndex((obj) => obj.edu_id === reference.editId)
+        reference.dataToRender[ind].eduData[0].text = getInput[0].text
+        reference.dataToRender[ind].eduData[1].text = getInput[1].text
+        reference.dataToRender[ind].eduData[2].text = getInput[2].text
+        reference.dataToRender[ind].eduData[3].text = getInput[3].text
+        const newData = reference.dataToRender[ind].eduData
+        console.log(newData)
+        
+        this.setState(prevState => ({
+            dataToRender: prevState.dataToRender.map(obj => obj.edu_id === prevState.editId ? {...obj, eduData: newData, edit: !obj.edit} : obj)
+        }), () => {console.log(this.state)}
+        )
+        
+    }
+
+
+
     render() {
         return (
             <div className="educational">
                 <h1>Educational Experience</h1>
                 <button onClick={this.addEdu} className="add-xp">Add</button>
                 {(this.state.viewForm) ? this.eduForm : ''}
-                <EducationalRender information={this.state.dataToRender} deleteCallback={this.handleDelete} />
+                <EducationalRender editState={this.state} information={this.state.dataToRender} deleteCallback={this.handleDelete} editCallback={this.handleEdit} handleEditSubmit={this.handleEditSubmit} />
             </div>
         )
     }

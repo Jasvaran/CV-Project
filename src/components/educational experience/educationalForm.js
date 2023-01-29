@@ -24,6 +24,7 @@ class EducationalForm extends React.Component {
                 id: uniqid()
             }
         }
+        
         this.onChange = this.onChange.bind(this)
         this.submitEdu = this.submitEdu.bind(this)
     }
@@ -71,7 +72,8 @@ class EducationalForm extends React.Component {
             eduInfo: [
                 {
                     edu_id: uniqid(),
-                    eduData: data
+                    eduData: data,
+                    edit: false
                 }
             ]
         }, () => {this.props.submitCallback(this.state.eduInfo)})

@@ -1,12 +1,14 @@
 /* eslint-disable no-useless-constructor */
 import React from "react";
 import uniqid from 'uniqid'
-
+import EditForm from "./editForm";
 class EducationalRender extends React.Component {
     constructor(props){
         super(props)
+
         
         this.deleteEdu = this.deleteEdu.bind(this)
+        this.editEdu = this.editEdu.bind(this)
     }
 
 
@@ -16,12 +18,18 @@ class EducationalRender extends React.Component {
         
     }
 
+    editEdu = (e) => {
+        e.preventDefault();
+        this.props.editCallback(e)
+    }
+
     render() {
         return (
             <div className="edu-render-container">
                 
                 {this.props.information.map(item => {
-                    return <div key={item.edu_id} className="edu-card">
+                    if (item.edit === false){
+                        return <div key={item.edu_id} className="edu-card">
                         <ul>
                             <li>
                                 Name of School: {item.eduData[0].text}
@@ -37,8 +45,15 @@ class EducationalRender extends React.Component {
                             </li>
                         </ul>
                         <button id={item.edu_id} onClick={this.deleteEdu}>Delete</button>
-
+                        <button data-key={item.edu_id} onClick={this.editEdu}>Edit</button>
                     </div>
+                    }
+                    else {
+                        return <div key={uniqid()}>
+                            <EditForm editState={this.props.editState} editCallbackSubmit={this.props.handleEditSubmit}/>
+                        </div>
+                    }
+                    
                 })}
             </div>
         )
