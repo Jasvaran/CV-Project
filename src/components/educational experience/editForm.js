@@ -106,7 +106,6 @@ class EditForm extends React.Component {
                         <input type="date" id="end-edit" value={this.state.endInput.text} onChange={this.onChange} />
                     </label>
                     <button type="submit">Submit</button>
-                    <button>test</button>
                 </form>
             </div>
         )

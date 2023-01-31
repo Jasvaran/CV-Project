@@ -1,13 +1,31 @@
 /* eslint-disable no-useless-constructor */
 import React from "react";
-
+import PracticalEdit from "./PracticalEdit";
+import uniqid from 'uniqid'
 
 class PracticalRender extends React.Component {
     constructor(props){
         super(props)
+
+
+        this.editExp = this.editExp.bind(this)
+        this.deleteExp = this.deleteExp.bind(this)
     }
 
 
+
+    editExp = (e) => {
+        e.preventDefault();
+        const editId = e.target.id
+        this.props.editExpCallback(editId)
+
+    }
+
+    deleteExp = (e) => {
+        e.preventDefault()
+        const id = e.target.id
+        this.props.deleteExpCallback(id)
+    }
 
     render() {
         return (
@@ -31,9 +49,13 @@ class PracticalRender extends React.Component {
                                 End Date: {obj.expData[4].text}
                             </li>
                         </ul>
-                        <button className="edit-exp">Edit</button>
+                        <button id={obj.exp_id} onClick={this.editExp} className="edit-exp">Edit</button>
+                        <button id={obj.exp_id} onClick={this.deleteExp}>Delete</button>
                     </div>
-                : '')}
+                : 
+                    <div key={uniqid()} className="edit-form">
+                        <PracticalEdit editSubmitCallback={this.props.editSubmitCallback} />
+                    </div>)}
             </div>
         )
     }
