@@ -27,6 +27,7 @@ class PracticalEdit extends React.Component {
 
         this.onChange = this.onChange.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
+        this.abc = 'abc'
     }
 
     onChange = (e) => {
@@ -74,6 +75,7 @@ class PracticalEdit extends React.Component {
         this.setState(prevState => ({
             editInfo: data
         }), () => {this.props.editSubmitCallback(this.state.editInfo)})
+        this.props.editFlag()
     }
 
     render() {

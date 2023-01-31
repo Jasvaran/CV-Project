@@ -10,14 +10,18 @@ class PracticalRender extends React.Component {
 
         this.editExp = this.editExp.bind(this)
         this.deleteExp = this.deleteExp.bind(this)
+        this.activateEdit = false
     }
 
 
 
     editExp = (e) => {
-        e.preventDefault();
-        const editId = e.target.id
-        this.props.editExpCallback(editId)
+        if (this.activateEdit === false){
+            e.preventDefault();
+            const editId = e.target.id
+            this.props.editExpCallback(editId)
+        }
+        this.activateEdit = true
 
     }
 
@@ -25,6 +29,10 @@ class PracticalRender extends React.Component {
         e.preventDefault()
         const id = e.target.id
         this.props.deleteExpCallback(id)
+    }
+
+    handleFlag = (e) => {
+        this.activateEdit = !this.activateEdit
     }
 
     render() {
@@ -54,7 +62,7 @@ class PracticalRender extends React.Component {
                     </div>
                 : 
                     <div key={uniqid()} className="edit-form">
-                        <PracticalEdit editSubmitCallback={this.props.editSubmitCallback} />
+                        <PracticalEdit editFlag={this.handleFlag} editSubmitCallback={this.props.editSubmitCallback} />
                     </div>)}
             </div>
         )

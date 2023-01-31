@@ -85,6 +85,7 @@ class EditForm extends React.Component {
         this.setState({
             editInfo: data
         }, () => this.props.editCallbackSubmit(this.state.editInfo))
+        this.props.editFlag()
     }
 
     

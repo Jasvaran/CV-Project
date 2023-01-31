@@ -9,6 +9,7 @@ class EducationalRender extends React.Component {
         
         this.deleteEdu = this.deleteEdu.bind(this)
         this.editEdu = this.editEdu.bind(this)
+        this.editFlag = false
     }
 
 
@@ -19,8 +20,15 @@ class EducationalRender extends React.Component {
     }
 
     editEdu = (e) => {
-        e.preventDefault();
-        this.props.editCallback(e)
+        if (this.editFlag === false){
+            e.preventDefault();
+            this.props.editCallback(e)
+        }
+        this.editFlag = true
+    }
+
+    handleFlag = (e) => {
+        this.editFlag = !this.editFlag
     }
 
     render() {
@@ -50,7 +58,7 @@ class EducationalRender extends React.Component {
                     }
                     else {
                         return <div key={uniqid()}>
-                            <EditForm editState={this.props.editState} editCallbackSubmit={this.props.handleEditSubmit}/>
+                            <EditForm editFlag={this.handleFlag} editState={this.props.editState} editCallbackSubmit={this.props.handleEditSubmit}/>
                         </div>
                     }
                     
